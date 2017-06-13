@@ -5,19 +5,13 @@
   "scripts": {
     "clean": "gulp clean",
     "compile": "gulp compile",
+    "prebuild":"gulp clean",
     "build": "gulp build",
-    "start": "concurrent --kill-others \"gulp watch\" \"lite-server\"",
+    "start-server":"node ./server/bin/www",
+    "start": "concurrent --kill-others \"gulp watch\" \"npm run start-server\"",
     "postinstall": "typings install"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kolorobot/angular2-typescript-gulp.git"
-  },
-  "author": "Rafał Borowiec",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kolorobot/angular2-typescript-gulp/issues"
-  },
+
   "dependencies": {
     "@angular/common": "~2.2.4",
     "@angular/compiler": "~2.2.4",

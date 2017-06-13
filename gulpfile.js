@@ -18,7 +18,7 @@ gulp.task('clean', (cb) => {
  * Lint all custom TypeScript files.
  */
 gulp.task('tslint', () => {
-    return gulp.src("src/**/*.ts")
+    return gulp.src("client/**/*.ts")
         .pipe(tslint({
             formatter: 'prose'
         }))
@@ -29,7 +29,7 @@ gulp.task('tslint', () => {
  * Compile TypeScript sources and create sourcemaps in build directory.
  */
 gulp.task("compile", ["tslint"], () => {
-    let tsResult = gulp.src("src/**/*.ts")
+    let tsResult = gulp.src("client/**/*.ts")
         .pipe(sourcemaps.init())
         .pipe(tsProject());
     return tsResult.js
@@ -41,7 +41,7 @@ gulp.task("compile", ["tslint"], () => {
  * Copy all resources that are not TypeScript files into build directory.
  */
 gulp.task("resources", () => {
-    return gulp.src(["src/**/*", "!**/*.ts"])
+    return gulp.src(["client/**/*", "!**/*.ts"])
         .pipe(gulp.dest("build"));
 });
 
@@ -65,10 +65,10 @@ gulp.task("libs", () => {
  * Watch for changes in TypeScript, HTML and CSS files.
  */
 gulp.task('watch', function () {
-    gulp.watch(["src/**/*.ts"], ['compile']).on('change', function (e) {
+    gulp.watch(["client/**/*.ts"], ['compile']).on('change', function (e) {
         console.log('TypeScript file ' + e.path + ' has been changed. Compiling.');
     });
-    gulp.watch(["src/**/*.html", "src/**/*.css"], ['resources']).on('change', function (e) {
+    gulp.watch(["client/**/*.html", "client/**/*.css"], ['resources']).on('change', function (e) {
         console.log('Resource file ' + e.path + ' has been changed. Updating.');
     });
 });
