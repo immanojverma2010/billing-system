@@ -5,13 +5,12 @@
   "scripts": {
     "clean": "gulp clean",
     "compile": "gulp compile",
-    "prebuild":"gulp clean",
+    "prebuild": "gulp clean",
     "build": "gulp build",
-    "start-server":"node ./server/bin/www",
+    "start-server": "node ./server/bin/www",
     "start": "concurrent --kill-others \"gulp watch\" \"npm run start-server\"",
     "postinstall": "typings install"
   },
-
   "dependencies": {
     "@angular/common": "~2.2.4",
     "@angular/compiler": "~2.2.4",
@@ -22,7 +21,6 @@
     "@angular/platform-browser-dynamic": "~2.2.4",
     "@angular/router": "~3.2.4",
     "@angular/upgrade": "~2.2.4",
-
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.3",
     "rxjs": "5.0.0-beta.12",
@@ -37,9 +35,9 @@
     "gulp-tslint": "^7.0.1",
     "gulp-typescript": "^3.1.3",
     "lite-server": "^2.2.2",
+    "ts-node": "^1.7.2",
     "tslint": "^4.0.2",
     "typescript": "^2.1.4",
-    "typings": "^2.0.0",
-    "ts-node": "^1.7.2"
+    "typings": "^2.0.0"
   }
 }

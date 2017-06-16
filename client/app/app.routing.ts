@@ -1,11 +1,12 @@
 import {Routes, RouterModule} from "@angular/router";
-import {TaskListComponent} from "./todo/components/task-list.component";
+import {AdminLoginComponent} from "./admin/components/adminLogin.component";
+
 import {AboutComponent} from "./about/components/about.component";
 import {ModuleWithProviders} from "@angular/core";
 
 const appRoutes: Routes = [
-    {path: '', redirectTo: 'tasks', pathMatch: 'full'},
-    {path: 'tasks', component: TaskListComponent, data: {title: 'TaskList'}},
+    {path: '', redirectTo: 'about', pathMatch: 'full'},
+    {path: 'adminLogin', component: AdminLoginComponent, data: {title: 'Admin Login'}},
     {path: 'about', component: AboutComponent, data: {title: 'About'}}
 ];
 
