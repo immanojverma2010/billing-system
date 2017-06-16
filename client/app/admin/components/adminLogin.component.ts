@@ -12,7 +12,7 @@ import {PaymentAppService} from "../../services/payment-app-service";
 
 export class AdminLoginComponent implements OnInit {
   model: any = {};
- loading = false;
+  loading = false;
   returnUrl: string;
 
   constructor(
@@ -21,16 +21,17 @@ export class AdminLoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-          this.returnUrl="";
+          this.returnUrl="/adminPage";
     }
 
     doLogin() {
         this.loading = true;
-        this.paymentAppService.login(this.model.username, this.model.password)
-            .subscribe(
-                data => {
-
-                    //this.router.navigate([this.returnUrl]);
+        console.log(this.model.username +" :" +this.model.password);
+        this.paymentAppService.login(this.model.username.trim(), this.model.password.trim())
+            .subscribe(data => {
+                        console.log(data);
+                        console.log("logged in");
+                    this.router.navigate([this.returnUrl]);
                 });
           }
 }

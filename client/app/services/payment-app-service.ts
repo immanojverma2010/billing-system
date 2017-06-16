@@ -12,13 +12,14 @@ export class PaymentAppService {
 
 
         login(name: string, pwd :string) {
+          console.log(name +" :" +pwd);
         var  bodyObj = {username: name, password: pwd};
           let headers = new Headers({ 'Content-Type': 'application/json' });
           let options = new RequestOptions({ headers: headers });
 
           let url = '/admin/adminLogIn';
 
-          return this.http.post(url, bodyObj, options )
+          return this.http.post(url, bodyObj, options)
                      .map((res:Response) => res.json());
         }
 

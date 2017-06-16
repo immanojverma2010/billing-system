@@ -28,18 +28,16 @@ router.route("/addAdmin")
 
 
 router.route("/adminLogIn")
-.get(function (req,res) {
+.post(function (req,res) {
   if(req.body){
     console.log(req.body);
-    var adminVar =new Admin(req.body);
 
-  adminVar.findOne({username:req.body.username,password:req.body.password}, function(err,admin){
+  Admin.findOne({username:req.body.username,password:req.body.password}, function(err,admin){
     if(err){
       res.send(err);
     }
     else{
-
-      res.send(admin);
+            res.send(admin);
     }
   });
 }
