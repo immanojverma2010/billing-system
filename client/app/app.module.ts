@@ -4,6 +4,7 @@ import {HttpModule} from '@angular/http';
 
 import {AppComponent} from "./app.component";
 import {AdminLoginComponent} from "./admin/components/adminLogin.component";
+import {AdminPageComponent} from "./admin/components/adminPage.component";
 import {AboutComponent} from "./about/components/about.component";
 
 
@@ -20,6 +21,7 @@ import {FormsModule} from "@angular/forms";
     declarations: [
         AppComponent,
         AdminLoginComponent,
+        AdminPageComponent,
         AboutComponent
     ],
     providers: [

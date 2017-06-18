@@ -7,7 +7,7 @@ import {ModuleWithProviders} from "@angular/core";
 
 const appRoutes: Routes = [
     {path: '', redirectTo: 'about', pathMatch: 'full'},
-    {path: 'adminLogin', component: AdminLoginComponent, data: {title: 'Admin Login'}},adminPage
+    {path: 'adminLogin', component: AdminLoginComponent, data: {title: 'Admin Login'}},
     {path: 'adminPage', component: AdminPageComponent, data: {title: 'Admin Page'}},
     {path: 'about', component: AboutComponent, data: {title: 'About'}}
 ];
