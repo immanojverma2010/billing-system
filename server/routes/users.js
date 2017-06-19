@@ -8,54 +8,41 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.route("/add")
+router.route("/addUser")
 .post(function (req,res) {
   if(req.body){
-    console.log(req.body);
-    var userVar =new User();
-    userVar.fullname=req.body.fullname;
-    userVar.username=req.body.username;
-    userVar.password=req.body.password;
-    userVar.age=req.body.age;
-    userVar.contact=req.body.contact;
-    /*userVar.save(function(err){
-    .
-    ..
-  });
-  */
-  //var userVar=new User(req.body);
-  userVar.save(function(err){
-    if(err){
-      res.send(err);
-    }
-    else{
-      res.send("User Inserted");
-    }
-  });
-}
-});
+      console.log(req.body);
+    User.findOne({username:req.body.userName}, function(err,user){
+      if(err)
+      {
+        res.send(err);
+      }
+      else if(user){
+        var resObj = {msg : "user named " +req.body.userName +" already present"};
+        console.log("user already present");
+        res.send(resObj);
+      }
+      else{
+        var userVar =new User();
+        userVar.fullname=req.body.firstName +" " +req.body.lastName;
+        userVar.username=req.body.userName;
+        userVar.password=req.body.password;
+        userVar.age=req.body.age;
+        userVar.contact=req.body.contact;
+        userVar.account=req.body.account;
 
-
-
-
-
-
-
-/*
-router.post('/checkname', function(req, res, next) {
-var obj=[{name:"Manoj", occupation: "Devloper"},{name:"Naveen", occupation: "SrDevloper"},{name:"Prasan", occupation: "JrDevloper"}];
-console.log(req.query.fname);
-var result=obj.filter(function(a) {
-if(a.name==req.query.fname){
-return a;
-}
-});
-
-
-res.json("Hi post"+JSON.stringify(Jresult));
-
-});
-
-*/
+        userVar.save(function(err){
+          if(err){
+            res.send(err);
+          }
+          else{
+          var resObj = {msg : "user named " +req.body.userName +" inserted"};
+            res.send(resObj);
+                }
+            });
+          }
+        });
+      }
+    });
 
 module.exports = router;

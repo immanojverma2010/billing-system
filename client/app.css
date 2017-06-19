@@ -1,0 +1,13 @@
+a {
+    cursor: pointer;
+}
+
+.help-block {
+    font-size: 12px;
+}
+
+.checkbox-grid #cb {
+    display: block;
+    float: left;
+    width: 25%;
+}

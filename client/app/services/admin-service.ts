@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AdminService {
         constructor(private http :Http) {
-            console.log('Payment Service Initialized...');
+            console.log('Admin Service Initialized...');
           }
 
 
@@ -24,7 +24,7 @@ export class AdminService {
         }
 
         addDefaultAdmin(value : any) {
-          console.log("server side ---- default admin object");
+          //console.log("server side ---- default admin object");
           console.log(value);
         var  bodyObj = value;
           let headers = new Headers({ 'Content-Type': 'application/json' });

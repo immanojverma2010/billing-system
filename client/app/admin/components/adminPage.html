@@ -1,24 +1,24 @@
 <div class="container">
   <br>
   <ul class="nav nav-tabs">
-  <li class="active"><a href="javascript:void(0)" #user (click)=userPage(user.value)>Add User</a></li>
-  <li><a href="javascript:void(0)" #bill (click)=billerPage(bill.value)>Add Biller</a></li>
+  <li class="active"><a href="javascript:void(0)" #userPage (click)=userPage(userPage.value)>Add User</a></li>
+  <li><a href="javascript:void(0)" #billPage (click)=billerPage(billPage.value)>Add Biller</a></li>
 
 </ul>
 <br> <br>
   <div class="" name="User Form" [hidden]="!userForm">
 
-  <form class="form-horizontal" (ngSubmit)="addUser()">
+  <form class="form-horizontal" (ngSubmit)="addUser() ">
   <fieldset>
 
   <!-- Form Name -->
-  <h1>Registration Form</h1>
+  <h1>User Registration Form</h1>
   <!-- Text input-->
 
   <div class="form-group">
     <label class="col-md-4 control-label" for="1">First Name</label>
     <div class="col-md-4">
-    <input id="1" name="1" type="text" [(ngModel)]="admin.firstName" #firstName placeholder="Enter Your First Name" class="form-control input-md" required="">
+    <input id="1" name="firstName" type="text" [(ngModel)]="user.firstName" #firstName placeholder="Enter  First Name" class="form-control input-md" required="">
 
     </div>
   </div>
@@ -27,33 +27,19 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="2">Last Name</label>
     <div class="col-md-4">
-    <input id="2" name="2" type="text" [(ngModel)]="admin.lastName" #lastName placeholder="Enter Your Last Name" class="form-control input-md" required="">
+    <input id="2" name="lastName" type="text" [(ngModel)]="user.lastName" #lastName placeholder="Enter  Last Name" class="form-control input-md" required="">
 
     </div>
   </div>
 
 
-  <!-- Multiple Checkboxes -->
 
-
-
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="Gender">Gender</label>
-    <div class="col-md-6">
-
-      <input name="gender" type="radio" [(ngModel)]="admin.gender" [value]="male"
-       [checked]="admin.gender==male" /> Male &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <input name="gender" type="radio"  [(ngModel)]="admin.gender" [value]="female"
-       [checked]="admin.gender==female" /> Female
-
-    </div>
-  </div>
 
   <!-- Text input-->
   <div class="form-group">
     <label class="col-md-4 control-label" for="age">Age</label>
     <div class="col-sm-2">
-    <input id="3" name="3" type="number" min="18" [(ngModel)]="admin.age" placeholder="Enter Age" class="form-control input-md" required="">
+    <input id="3" name="age" type="number" min="18" [(ngModel)]="user.age" placeholder="Enter Age" class="form-control input-md" required="">
     </div>
   </div>
 
@@ -61,15 +47,25 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="contact">Contact</label>
     <div class="col-md-4">
-    <input id="4" name="4" maxlength="10"  pattern="[0-9]{10}" title="Mobile number should be of 10 digit without +91" placeholder="Enter your mobile number" [(ngModel)]="admin.contact" class="form-control input-md" required="">
+    <input id="4" name="contact" maxlength="10"  pattern="[0-9]{10}" title="Mobile number should be of 10 digit without +91" placeholder="Enter  mobile number" [(ngModel)]="user.contact" class="form-control input-md" required="">
     </div>
   </div>
 
   <!-- Text input-->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="3">User Name</label>
+    <label class="col-md-4 control-label" for="contact">Account</label>
     <div class="col-md-4">
-      <input id="5" name="5" type="text" placeholder="Enter Your User Name" [(ngModel)]="admin.userName" class="form-control input-md" required="">
+    <input id="4" name="account" maxlength="10"  pattern="[0-9]{10}" title="Account number should be of 10 digit" placeholder="Enter  Account number" [(ngModel)]="user.account" class="form-control input-md" required="">
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="3">Email</label>
+    <div class="col-md-4">
+      <input id="5" name="userName" type="email" placeholder="Enter  User Name" [(ngModel)]="user.userName" class="form-control input-md" required="">
+
+        <p *ngIf="msg" class="text-primary"><b>{{msg}}</b></p>
 
     </div>
   </div>
@@ -77,7 +73,7 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="5">Password </label>
     <div class="col-md-4">
-      <input id="6" name="6" type="password" placeholder="Enter Password" [(ngModel)]="admin.password" class="form-control input-md" required="">
+      <input id="6" name="password" type="password" placeholder="Enter Password" [(ngModel)]="user.password" class="form-control input-md" required="">
 
     </div>
   </div>
@@ -87,9 +83,12 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="1"></label>
     <div class="col-md-8">
-      <button id="1" name="1" type="submit" class="btn btn-success">Save</button>
-      <button id="2" name="2" class="btn btn-danger">Discard</button>
+
+      <button type="submit" class="btn btn-success">Save</button>
+      <button class="btn btn-danger" type="reset">Discard</button>
+
     </div>
+
   </div>
   </fieldset>
   </form>
@@ -100,6 +99,81 @@
 
   </div>
   <div class="" name="Biller Form" [hidden]="!billerForm">
-    Biller Form will be shown here
+
+    <form class="form-horizontal" (ngSubmit)="addBiller() ">
+    <fieldset>
+
+    <!-- Form Name -->
+    <h1>Biller Registration Form</h1>
+    <!-- Text input-->
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="1">Biller Name</label>
+      <div class="col-md-4">
+      <input id="1" name="firstName" type="text" [(ngModel)]="biller.name" #name  placeholder="Enter Biller Name" class="form-control input-md" required="">
+
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="2">Utility Name</label>
+      <div class="col-md-4">
+      <input id="2" name="utilityName" type="text" [(ngModel)]="biller.utility" #name  placeholder="Enter  Utility Name" class="form-control input-md" required="">
+
+      </div>
+    </div>
+
+
+<div class="row">
+
+
+    <div class="form-group-lg col-xs-5">
+        <label class="control-label" for="options">Select Cities:</label><br>
+        <div  *ngFor="let option of options">
+          <div class="form-group-lg">
+            <input id="cb" type="checkbox"
+                   name="options"
+                    (click)="selectedValue(option.name)"
+                   [checked]="option.checked"
+                   />
+                   <label>
+            {{option.name}}
+        </label>
+                </div>
+
+        </div>
+    </div>
+    </div>
+
+
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="contact">Account</label>
+      <div class="col-md-4">
+      <input id="4" name="account" maxlength="10" [(ngModel)]="biller.account" pattern="[0-9]{10}" title="Account number should be of 10 digit" placeholder="Enter account number"  class="form-control input-md" required="">
+      </div>
+    </div>
+
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="1"></label>
+      <div class="col-md-8">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button class="btn btn-danger" type="reset">Discard</button>
+        <div class="" *ngIf="msg">
+          <br>
+          <p class="text-success"><b>{{msg}}</b></p>
+        </div>
+      </div>
+
+    </div>
+    </fieldset>
+    </form>
+
+
+
   </div>
 </div>
