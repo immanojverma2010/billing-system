@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 
 @Injectable()
-export class PaymentAppService {
+export class AdminService {
         constructor(private http :Http) {
             console.log('Payment Service Initialized...');
           }
@@ -22,6 +22,20 @@ export class PaymentAppService {
           return this.http.post(url, bodyObj, options)
                      .map((res:Response) => res.json());
         }
+
+        addDefaultAdmin(value : any) {
+          console.log("server side ---- default admin object");
+          console.log(value);
+        var  bodyObj = value;
+          let headers = new Headers({ 'Content-Type': 'application/json' });
+          let options = new RequestOptions({ headers: headers });
+
+          let url = '/admin/addAdmin';
+
+          return this.http.post(url, bodyObj, options)
+                     .map((res:Response) => res.json());
+              }
+
 
 /*
         getTasks() {

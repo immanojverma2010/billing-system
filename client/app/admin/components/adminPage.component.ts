@@ -8,16 +8,17 @@ import {OnInit} from "@angular/core";
 export class AdminPageComponent implements OnInit {
 userForm = true;
 billerForm = false;
+admin: any = {};
     ngOnInit() {
 
     }
 
-    addUser(value :any) :void {
+    userPage(value :any) :void {
         this.userForm = true;
         this.billerForm = false;
     }
 
-    addBiller(value :any) :void {
+    billerPage(value :any) :void {
       this.billerForm = true;
       this.userForm = false;
     }

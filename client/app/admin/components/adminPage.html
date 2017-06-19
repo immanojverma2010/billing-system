@@ -1,23 +1,24 @@
 <div class="container">
   <br>
   <ul class="nav nav-tabs">
-  <li class="active"><a href="javascript:void(0)" #user (click)=addUser(user.value)>Add User</a></li>
-  <li><a href="javascript:void(0)" #bill (click)=addBiller(bill.value)>Add Biller</a></li>
+  <li class="active"><a href="javascript:void(0)" #user (click)=userPage(user.value)>Add User</a></li>
+  <li><a href="javascript:void(0)" #bill (click)=billerPage(bill.value)>Add Biller</a></li>
 
 </ul>
 <br> <br>
   <div class="" name="User Form" [hidden]="!userForm">
 
-  <form class="form-horizontal">
+  <form class="form-horizontal" (ngSubmit)="addUser()">
   <fieldset>
 
   <!-- Form Name -->
   <h1>Registration Form</h1>
   <!-- Text input-->
+
   <div class="form-group">
     <label class="col-md-4 control-label" for="1">First Name</label>
     <div class="col-md-4">
-    <input id="1" name="1" type="text" placeholder="" class="form-control input-md" required="">
+    <input id="1" name="1" type="text" [(ngModel)]="admin.firstName" #firstName placeholder="Enter Your First Name" class="form-control input-md" required="">
 
     </div>
   </div>
@@ -26,28 +27,41 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="2">Last Name</label>
     <div class="col-md-4">
-    <input id="2" name="2" type="text" placeholder="" class="form-control input-md" required="">
+    <input id="2" name="2" type="text" [(ngModel)]="admin.lastName" #lastName placeholder="Enter Your Last Name" class="form-control input-md" required="">
 
     </div>
   </div>
 
 
   <!-- Multiple Checkboxes -->
+
+
+
   <div class="form-group">
     <label class="col-md-4 control-label" for="Gender">Gender</label>
+    <div class="col-md-6">
+
+      <input name="gender" type="radio" [(ngModel)]="admin.gender" [value]="male"
+       [checked]="admin.gender==male" /> Male &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <input name="gender" type="radio"  [(ngModel)]="admin.gender" [value]="female"
+       [checked]="admin.gender==female" /> Female
+
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="age">Age</label>
+    <div class="col-sm-2">
+    <input id="3" name="3" type="number" min="18" [(ngModel)]="admin.age" placeholder="Enter Age" class="form-control input-md" required="">
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="contact">Contact</label>
     <div class="col-md-4">
-    <div class="checkbox">
-      <label for="Gender-0">
-        <input type="checkbox" name="Gender" id="Gender-0" value="1">
-        Male
-      </label>
-  	</div>
-    <div class="checkbox">
-      <label for="Gender-1">
-        <input type="checkbox" name="Gender" id="Gender-1" value="2">
-        Female
-      </label>
-  	</div>
+    <input id="4" name="4" maxlength="10"  pattern="[0-9]{10}" title="Mobile number should be of 10 digit without +91" placeholder="Enter your mobile number" [(ngModel)]="admin.contact" class="form-control input-md" required="">
     </div>
   </div>
 
@@ -55,7 +69,7 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="3">User Name</label>
     <div class="col-md-4">
-      <input id="3" name="3" type="text" placeholder="" class="form-control input-md" required="">
+      <input id="5" name="5" type="text" placeholder="Enter Your User Name" [(ngModel)]="admin.userName" class="form-control input-md" required="">
 
     </div>
   </div>
@@ -63,8 +77,8 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="5">Password </label>
     <div class="col-md-4">
-      <input id="5" name="5" type="password" placeholder="" class="form-control input-md" required="">
-      <span class="help-block">Help</span>
+      <input id="6" name="6" type="password" placeholder="Enter Password" [(ngModel)]="admin.password" class="form-control input-md" required="">
+
     </div>
   </div>
 
@@ -73,11 +87,10 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="1"></label>
     <div class="col-md-8">
-      <button id="1" name="1" class="btn btn-success">Save</button>
+      <button id="1" name="1" type="submit" class="btn btn-success">Save</button>
       <button id="2" name="2" class="btn btn-danger">Discard</button>
     </div>
   </div>
-
   </fieldset>
   </form>
 

@@ -6,6 +6,7 @@ import {AppComponent} from "./app.component";
 import {AdminLoginComponent} from "./admin/components/adminLogin.component";
 import {AdminPageComponent} from "./admin/components/adminPage.component";
 import {AboutComponent} from "./about/components/about.component";
+import {HomeComponent} from "./home/components/home.component";
 
 
 import {routing, appRoutingProviders} from './app.routing';
@@ -22,7 +23,8 @@ import {FormsModule} from "@angular/forms";
         AppComponent,
         AdminLoginComponent,
         AdminPageComponent,
-        AboutComponent
+        AboutComponent,
+        HomeComponent
     ],
     providers: [
         appRoutingProviders

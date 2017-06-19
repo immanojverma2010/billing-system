@@ -2,12 +2,12 @@ import {Component} from "@angular/core";
 import {OnInit} from "@angular/core";
 import { Router } from '@angular/router';
 
-import {PaymentAppService} from "../../services/payment-app-service";
+import {AdminService} from "../../services/admin-service";
 
 @Component({
     selector:"admin",
     templateUrl: './app/admin/components/adminLogin.html',
-    providers: [PaymentAppService]
+    providers: [AdminService]
 })
 
 export class AdminLoginComponent implements OnInit {
@@ -17,7 +17,7 @@ export class AdminLoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private paymentAppService: PaymentAppService,
+    private _adminService: AdminService,
     ) { }
 
     ngOnInit() {
@@ -27,7 +27,7 @@ export class AdminLoginComponent implements OnInit {
     doLogin() {
         this.loading = true;
         console.log(this.model.username +" :" +this.model.password);
-        this.paymentAppService.login(this.model.username.trim(), this.model.password.trim())
+        this._adminService.login(this.model.username.trim(), this.model.password.trim())
             .subscribe(data => {
                         console.log(data);
                         console.log("logged in");

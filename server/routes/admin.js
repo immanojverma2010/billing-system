@@ -12,16 +12,29 @@ router.route("/addAdmin")
 .post(function (req,res) {
   if(req.body){
     console.log(req.body);
-    var adminVar =new Admin(req.body);
 
-  adminVar.save(function(err){
-    if(err){
-      res.send(err);
-    }
-    else{
-      res.send("Admin Inserted");
-    }
-  });
+
+    Admin.findOne(req.body, function(err,admin){
+      if(err)
+      {
+        res.send(err);
+      }
+      else if(admin){
+        console.log("admin already present");
+        res.send(admin);
+      }
+      else{
+        var adminVar =new Admin(req.body);
+        adminVar.save(function(err){
+          if(err){
+            res.send(err);
+          }
+          else{
+            res.send(req.body);
+          }
+        });
+      }
+    });
 }
 });
 
