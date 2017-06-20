@@ -56,6 +56,7 @@ gulp.task("libs", () => {
             'reflect-metadata/Reflect.js',
             'rxjs/**/*.js',
             'zone.js/dist/**',
+            'bootstrap/dist/**',
             '@angular/**/bundles/**'
         ], {cwd: "node_modules/**"}) /* Glob required here. */
         .pipe(gulp.dest("build/lib"));

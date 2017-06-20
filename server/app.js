@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var billers = require('./routes/billers');
 var admin = require('./routes/admin');
 
 
@@ -46,6 +47,7 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/billers', billers);
 app.use('/admin', admin);
 
 

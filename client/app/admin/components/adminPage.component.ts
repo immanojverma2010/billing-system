@@ -2,11 +2,12 @@ import {Component} from "@angular/core";
 import {OnInit} from "@angular/core";
 
 import {UserService} from "../../services/user-service";
+import {BillerService} from "../../services/biller-service";
 
 @Component({
     selector:"admin-page",
     templateUrl: './app/admin/components/adminPage.html',
-    providers: [UserService]
+    providers: [UserService, BillerService]
 })
 export class AdminPageComponent implements OnInit {
 userForm = true;
@@ -41,7 +42,8 @@ let self = this;
 //console.log(this.options);
   }
 
-    constructor(private _userService :UserService) {
+    constructor(private _userService :UserService,
+                private _billerService :BillerService) {
 
     }
     ngOnInit() {
@@ -56,12 +58,24 @@ let self = this;
       });
       //console.log(this.cities);
     }
-addBiller() {
-        this.getCityValues();
-        this.biller.cities = this.cities;
-        this.cities = [];
-  console.log(this.biller);
-}
+    addBiller() {
+        console.log(this.biller);
+       let  self = this ;
+            this.getCityValues();
+            //this.biller.cities = this.cities;
+            this.cities = [];
+            this._billerService.addBiller(this.biller)
+                .subscribe(data => {
+                  console.log(data);
+                  this.msg = data.msg;
+                  setTimeout(function(){self.msg = null;
+                  },2000);
+                  console.log(this.msg);
+                  this.biller = {};
+                });
+
+    }
+
     addUser() {
       console.log(this.user);
       let  self = this ;
