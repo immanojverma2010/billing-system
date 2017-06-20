@@ -18,7 +18,7 @@ export class BillerService {
           let headers = new Headers({ 'Content-Type': 'application/json' });
           let options = new RequestOptions({ headers: headers });
 
-          let url = '/biller/addBiller';
+          let url = '/billers/addBiller';
 
           return this.http.post(url, bodyObj, options)
                      .map((res:Response) => res.json());
