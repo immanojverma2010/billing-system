@@ -7,34 +7,36 @@
 </ul>
 <br> <br>
 <div class="" name="Subscribe Biller" [hidden]="!regBillerPage">
-Subscribe biller:
+
+<div class="">
+    <span class="pul-left text-success">
+    Hello {{user.fullname}}
+  </span>
+  <span class="pull-right text-success">
+    {{user.username}}
+  </span></div><br><br>
+Subscribe biller:<br><br>
 
     <div>
-        <label>select your city</label>
-        <div>
-            <select #city (input)=onInputCity(city.value)>
+        <label>select your city:</label>
+
+            <select #city (click)=onInputCity(city.value)>
                 <option *ngFor="let x of options" [value]="x.name">{{x.name}}</option>
             </select>
-        </div>
-        <span class="col-sm-4 pull-right text-danger"><b>{{msg}}</b></span>
     </div>
 
 
     <div class="" *ngIf=billers>
-
       <div>
-          <label>select  biller</label>
-          <div>
-              <select #biller (input)=onInputBiller(biller.value)>
+          <label>select  biller:</label>
+              <select #biller (click)=onInputBiller(biller.value)>
                   <option *ngFor="let y of billers" [value]="y.email">{{y.billername}}</option>
               </select>
-          </div>
-          <span class="col-sm-4 pull-right text-danger"><b>{{msg}}</b></span>
       </div>
     </div>
 
-      <div class="" *ngIf=showAccount>
-
+      <div class="" *ngIf=billerValue>
+        <label>Pay from : </label> <input type="text" [disabled]="true"  [value]="user.account">
       </div>
 
 

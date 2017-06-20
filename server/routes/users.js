@@ -24,6 +24,23 @@ router.route("/userLogIn")
 }
 });
 
+router.route("/findUser/:username")
+.get(function (req,res) {
+    //var name=req.body.name;
+
+      //console.log(req.params.username);
+      User.findOne({username:req.params.username},function(err,user){
+        if(err)
+        {
+          res.send(err);
+        }
+        else{
+            console.log(user);
+          res.send(user);
+        }
+      });
+});
+
 
 router.route("/addUser")
 .post(function (req,res) {

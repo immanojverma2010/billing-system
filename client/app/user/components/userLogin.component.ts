@@ -31,7 +31,7 @@ export class UserLoginComponent implements OnInit {
             .subscribe(data => {
                         console.log(data);
                         console.log("logged in");
-                    this.router.navigate([this.returnUrl]);
+                    this.router.navigate([this.returnUrl, {email:this.model.username.trim()}]);
                 });
           }
 }

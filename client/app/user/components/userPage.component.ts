@@ -1,18 +1,24 @@
 import {Component} from "@angular/core";
 import {OnInit} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
 
 import {BillerService} from "../../services/biller-service";
+import {UserService} from "../../services/user-service";
+
 
 @Component({
     selector:"user-page",
     templateUrl: './app/user/components/userPage.html',
-    providers: [BillerService]
+    providers: [BillerService, UserService]
 })
 export class UserPageComponent implements OnInit {
   regBillerPage = false;
   bills = false;
   city = null;
   msg = null;
+  username = null;
+  user = {};
+  billerValue = null;
   showAccount = false;
   billers :any = null;
   options = [
@@ -26,9 +32,22 @@ export class UserPageComponent implements OnInit {
         {name:'Chandigarh', index:'7', checked:false}
       ];
 
-    constructor(private _billerService: BillerService) { }
+    constructor(private _billerService: BillerService,
+                private route: ActivatedRoute,
+
+                private _userService: UserService) { }
 
     ngOnInit() {
+          this.route.params.subscribe(params => {
+            this.username = params['email'];
+          });
+
+          this._userService.findDetails(this.username)
+              .subscribe(data => {
+
+                      this.user = data;
+
+              });
 
     }
 
@@ -36,9 +55,7 @@ export class UserPageComponent implements OnInit {
       this.city = value;
       this.findBiller();
     }
-    onInputBiller(value :any) {
-          this.showAccount = true;
-    }
+
     findBiller() {
       let self = this;
       this._billerService.findBiller(this.city)
@@ -53,10 +70,15 @@ export class UserPageComponent implements OnInit {
                             console.log(this.billers);
                             this.city = null;
                         }
-
-
               });
+
     }
+
+    onInputBiller(value :any) {
+          this.billerValue = value;
+
+    }
+
     subscribeBiller() {
         this.bills = false;
         this.regBillerPage = true;

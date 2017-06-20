@@ -22,6 +22,11 @@ export class UserService {
                        .map((res:Response) => res.json());
           }
 
+            findDetails(value :any) {
+              return this.http.get('/users/findUser/' +value)
+                  .map((res:Response) => res.json());
+            }
+
         addUser(value : any) {
           console.log(value);
 
