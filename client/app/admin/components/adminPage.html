@@ -63,10 +63,8 @@
     <label class="col-md-4 control-label" for="3">Email</label>
     <div class="col-md-4">
       <input id="5" name="userName" type="email" placeholder="Enter  User Name" [(ngModel)]="user.userName" class="form-control input-md" required="">
-
-        <p *ngIf="msg" class="text-primary"><b>{{msg}}</b></p>
-
     </div>
+    <span class="col-sm-4 pull-right text-primary"><b>{{msg}}</b></span>
   </div>
   <!-- Password input-->
   <div class="form-group">
@@ -148,11 +146,11 @@
       <label class="col-md-4 control-label" for="3">Email</label>
       <div class="col-md-4">
         <input id="5" name="email" type="email" placeholder="Enter  User Name" [(ngModel)]="biller.email" class="form-control input-md" required="">
-
-          <p *ngIf="msg" class="text-primary"><b>{{msg}}</b></p>
-
       </div>
+        <span class="col-sm-4 pull-right text-primary"><b>{{msg}}</b></span>
     </div>
+
+
     <!-- Password input-->
     <div class="form-group">
       <label class="col-md-4 control-label" for="5">Password </label>
@@ -179,11 +177,7 @@
       <div class="col-md-8">
         <button type="submit" class="btn btn-success">Save</button>
         <button class="btn btn-danger" type="reset">Discard</button>
-        <div class="" *ngIf="msg">
-          <br>
-          <p class="text-success"><b>{{msg}}</b></p>
         </div>
-      </div>
 
     </div>
     </fieldset>

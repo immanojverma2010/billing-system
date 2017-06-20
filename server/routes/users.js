@@ -8,6 +8,23 @@ router.get('/', function(req, res, next) {
 });
 
 
+router.route("/userLogIn")
+.post(function (req,res) {
+  if(req.body){
+    console.log(req.body);
+
+  User.findOne({username:req.body.username,password:req.body.password}, function(err,user){
+    if(err){
+      res.send(err);
+    }
+    else{
+            res.send(user);
+    }
+  });
+}
+});
+
+
 router.route("/addUser")
 .post(function (req,res) {
   if(req.body){

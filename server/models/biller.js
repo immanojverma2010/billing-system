@@ -7,7 +7,8 @@ var billerDetailsSchema = new Schema({
   utilityname: String,
   email: String,
   password: String,
-  account: String
+  account: String,
+  cities: [String]
 });
 
 module.exports = mongoose.model('BillerDetails',billerDetailsSchema);

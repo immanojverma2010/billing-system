@@ -62,8 +62,9 @@ let self = this;
         console.log(this.biller);
        let  self = this ;
             this.getCityValues();
-            //this.biller.cities = this.cities;
+            this.biller.cities = this.cities;
             this.cities = [];
+            this.msg = null;
             this._billerService.addBiller(this.biller)
                 .subscribe(data => {
                   console.log(data);

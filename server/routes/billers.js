@@ -29,6 +29,7 @@ router.route("/addBiller")
         billerVar.email=req.body.email;
         billerVar.password=req.body.password;
         billerVar.account=req.body.account;
+        billerVar.cities=req.body.cities;
 
         billerVar.save(function(err){
           if(err){

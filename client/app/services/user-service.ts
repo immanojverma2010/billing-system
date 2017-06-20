@@ -10,9 +10,21 @@ export class UserService {
             console.log('User Service Initialized...');
           }
 
+          login(name: string, pwd :string) {
+            console.log(name +" :" +pwd);
+          var  bodyObj = {username: name, password: pwd};
+            let headers = new Headers({ 'Content-Type': 'application/json' });
+            let options = new RequestOptions({ headers: headers });
+
+            let url = '/users/userLogIn';
+
+            return this.http.post(url, bodyObj, options)
+                       .map((res:Response) => res.json());
+          }
+
         addUser(value : any) {
           console.log(value);
-          
+
           var  bodyObj = value;
 
           let headers = new Headers({ 'Content-Type': 'application/json' });
