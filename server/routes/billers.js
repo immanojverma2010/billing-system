@@ -8,6 +8,36 @@ router.get('/', function(req, res, next) {
 });
 
 
+
+
+router.route("/findBillers")
+.post(function (req,res) {
+  if(req.body){
+      console.log(req.body);
+
+      var city=[];
+      city.push(req.body.city);
+    Biller.find({cities : {$all : city}},{_id : 0, _v:0},function(err,biller){
+      if(err)
+      {
+        res.send(err);
+      }
+      else if(biller){
+        console.log(biller);
+        res.send(biller);
+
+      }
+      else{
+          obj = {msg : "No biller Present"};
+        res.send(obj);
+      }
+    });
+  }
+});
+
+
+
+
 router.route("/addBiller")
 .post(function (req,res) {
   if(req.body){

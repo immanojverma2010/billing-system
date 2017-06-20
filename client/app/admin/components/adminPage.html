@@ -1,8 +1,8 @@
 <div class="container">
   <br>
   <ul class="nav nav-tabs">
-  <li><a href="javascript:void(0)" #usePage (click)=userPage(usePage.value)>Add User</a></li>
-  <li><a href="javascript:void(0)" #billPage (click)=billerPage(billPage.value)>Add Biller</a></li>
+  <li [class.active]="userForm"><a href="javascript:void(0)" #usePage (click)=userPage(usePage.value)>Add User</a></li>
+  <li [class.active]="billerForm"><a href="javascript:void(0)" #billPage (click)=billerPage(billPage.value)>Add Biller</a></li>
 
 </ul>
 <br> <br>

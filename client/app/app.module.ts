@@ -26,7 +26,7 @@ import {FormsModule} from "@angular/forms";
         AdminLoginComponent,
         AdminPageComponent,
         UserLoginComponent,
-        UserPageComponent
+        UserPageComponent,
         AboutComponent,
         HomeComponent
     ],

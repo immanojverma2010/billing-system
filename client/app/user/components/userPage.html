@@ -1,1 +1,46 @@
-<h1>This is User page after </h1>
+<div class="container">
+  <br>
+  <ul class="nav nav-tabs">
+  <li [class.active]="regBillerPage"><a href="javascript:void(0)" (click)=subscribeBiller()>Register Biller</a></li>
+  <li [class.active]="bills"><a href="javascript:void(0)" (click)=showBills()>Show Pending Bills</a></li>
+
+</ul>
+<br> <br>
+<div class="" name="Subscribe Biller" [hidden]="!regBillerPage">
+Subscribe biller:
+
+    <div>
+        <label>select your city</label>
+        <div>
+            <select #city (input)=onInputCity(city.value)>
+                <option *ngFor="let x of options" [value]="x.name">{{x.name}}</option>
+            </select>
+        </div>
+        <span class="col-sm-4 pull-right text-danger"><b>{{msg}}</b></span>
+    </div>
+
+
+    <div class="" *ngIf=billers>
+
+      <div>
+          <label>select  biller</label>
+          <div>
+              <select #biller (input)=onInputBiller(biller.value)>
+                  <option *ngFor="let y of billers" [value]="y.email">{{y.billername}}</option>
+              </select>
+          </div>
+          <span class="col-sm-4 pull-right text-danger"><b>{{msg}}</b></span>
+      </div>
+    </div>
+
+      <div class="" *ngIf=showAccount>
+
+      </div>
+
+
+</div>
+
+<div class="" name="Subscribe Biller" [hidden]="!bills">
+All bills
+</div>
+</div>

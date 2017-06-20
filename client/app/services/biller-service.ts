@@ -24,4 +24,18 @@ export class BillerService {
                      .map((res:Response) => res.json());
               }
 
+              findBiller(value : any) {
+                //console.log(value);
+
+                var  bodyObj = {city :value};
+
+                let headers = new Headers({ 'Content-Type': 'application/json' });
+                let options = new RequestOptions({ headers: headers });
+
+                let url = '/billers/findBillers';
+
+                return this.http.post(url, bodyObj, options)
+                           .map((res:Response) => res.json());
+                    }
+
 }
