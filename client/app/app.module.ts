@@ -5,6 +5,8 @@ import {HttpModule} from '@angular/http';
 import {AppComponent} from "./app.component";
 import {AdminLoginComponent} from "./admin/components/adminLogin.component";
 import {AdminPageComponent} from "./admin/components/adminPage.component";
+import {UserLoginComponent} from "./user/components/userLogin.component";
+import {UserPageComponent} from "./user/components/userPage.component";
 import {AboutComponent} from "./about/components/about.component";
 import {HomeComponent} from "./home/components/home.component";
 
@@ -23,6 +25,8 @@ import {FormsModule} from "@angular/forms";
         AppComponent,
         AdminLoginComponent,
         AdminPageComponent,
+        UserLoginComponent,
+        UserPageComponent
         AboutComponent,
         HomeComponent
     ],
