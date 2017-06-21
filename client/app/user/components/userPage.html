@@ -8,38 +8,57 @@
 <br> <br>
 <div class="" name="Subscribe Biller" [hidden]="!regBillerPage">
 
+
+  <form class="form-horizontal" >
+  <fieldset>
 <div class="">
     <span class="pul-left text-success">
     Hello {{user.fullname}}
   </span>
   <span class="pull-right text-success">
     {{user.username}}
-  </span></div><br><br>
-Subscribe biller:<br><br>
+  </span></div>
+  <br><br>
 
-    <div>
-        <label>select your city:</label>
+  <h1>Subscribe biller:</h1><br>
 
-            <select #city (click)=onInputCity(city.value)>
-                <option *ngFor="let x of options" [value]="x.name">{{x.name}}</option>
-            </select>
-    </div>
+<div class="form-group">
+  <label class="col-md-5 control-label">Select your city:</label>
+  <div class="col-md-6">
+    <select class="control-label" #city (click)=onInputCity(city.value)>
+        <option *ngFor="let x of options" [value]="x.name">{{x.name}}</option>
+    </select>
+                  {{msg}}
+        </div>
+      </div>
 
-
-    <div class="" *ngIf=billers>
-      <div>
-          <label>select  biller:</label>
-              <select #biller (click)=onInputBiller(biller.value)>
+    <div class="form-group" *ngIf=billers>
+        <label class="col-md-5 control-label">select  biller:</label>
+            <div class="col-md-6">
+              <select class="control-label" #biller (click)=onInputBiller(biller.value)>
                   <option *ngFor="let y of billers" [value]="y.email">{{y.billername}}</option>
               </select>
+           </div>
+      </div>
+
+      <div class="form-group" *ngIf=billerValue>
+        <label class="col-md-5 control-label">Pay from : </label>
+          <div class="col-md-6">
+         <input type="text" [disabled]="true"  [value]="user.account">
       </div>
     </div>
 
-      <div class="" *ngIf=billerValue>
-        <label>Pay from : </label> <input type="text" [disabled]="true"  [value]="user.account">
+    <div class="form-group" *ngIf=billerValue >
+      <div class="" [hidden]="true ? setTimeout(function(){return false;},1500): true">
+          Hello
       </div>
 
+    </div>
+    <button class="btn" (click)="back()"> Back </button>
+    <button class="btn btn-primary" (click)="proceed()"> Proceed </button>
 
+</fieldset>
+</form>
 </div>
 
 <div class="" name="Subscribe Biller" [hidden]="!bills">

@@ -6,6 +6,7 @@ import {BillerService} from "../../services/biller-service";
 import {UserService} from "../../services/user-service";
 
 
+
 @Component({
     selector:"user-page",
     templateUrl: './app/user/components/userPage.html',
@@ -34,21 +35,17 @@ export class UserPageComponent implements OnInit {
 
     constructor(private _billerService: BillerService,
                 private route: ActivatedRoute,
-
+                private router: Router,
                 private _userService: UserService) { }
 
     ngOnInit() {
           this.route.params.subscribe(params => {
             this.username = params['email'];
           });
-
           this._userService.findDetails(this.username)
               .subscribe(data => {
-
                       this.user = data;
-
               });
-
     }
 
     onInputCity(value :any) {
@@ -76,7 +73,14 @@ export class UserPageComponent implements OnInit {
 
     onInputBiller(value :any) {
           this.billerValue = value;
+    }
 
+    back() {
+    this.router.navigate(['/userPage', {email:this.username.trim()}]);
+    }
+
+    proceed() {
+          console.log("Heloo");        
     }
 
     subscribeBiller() {
