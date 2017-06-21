@@ -4,13 +4,14 @@ import {Router, ActivatedRoute} from "@angular/router";
 
 import {BillerService} from "../../services/biller-service";
 import {UserService} from "../../services/user-service";
+import {BillingService} from "../../services/billing-service";
 
 
 
 @Component({
     selector:"user-page",
     templateUrl: './app/user/components/userPage.html',
-    providers: [BillerService, UserService]
+    providers: [BillerService, UserService, BillingService]
 })
 export class UserPageComponent implements OnInit {
   regBillerPage = false;
@@ -22,6 +23,9 @@ export class UserPageComponent implements OnInit {
   billerValue = null;
   showAccount = false;
   billers :any = null;
+  showVendorForm =false;
+  modeOfPayment = false;
+  formData = {};
   options = [
         {name:'Delhi', index:'0', checked:false},
         {name:'Kolkata', index:'1', checked:false},
@@ -36,7 +40,9 @@ export class UserPageComponent implements OnInit {
     constructor(private _billerService: BillerService,
                 private route: ActivatedRoute,
                 private router: Router,
-                private _userService: UserService) { }
+                private _userService: UserService,
+                private _billingService: BillingService
+                 ) { }
 
     ngOnInit() {
           this.route.params.subscribe(params => {
@@ -72,15 +78,45 @@ export class UserPageComponent implements OnInit {
     }
 
     onInputBiller(value :any) {
+          let self = this;
           this.billerValue = value;
+          console.log(this.billerValue);
+          setTimeout(function (){self.modeOfPayment = true;},0);
     }
 
-    back() {
-    this.router.navigate(['/userPage', {email:this.username.trim()}]);
-    }
+billerTxn() {
+  console.log(this.formData);
+  console.log(this.user);
+  let obj = this.billers.find(function (biller) {
+    return biller.billername === this.billerValue;
+  });
+
+  var billData = {
+userId : this.user.username,
+userAccount: this.user.account,
+userName: this.user.fullname,
+billerId: this.billerValue.email,
+billerAccount: this.billerValue.account,
+billerName: this.billerValue.name,
+paymentFor: this.formData.mobile,
+paymentMode: this.formData.paymentMode,
+billDate: this.formData.billDate,
+dueDate: this.formData.dueDate,
+  };
+
+console.log(billData);
+  /*
+  this._billingService.storeBillingData(this.username)
+      .subscribe(data => {
+              this.formData = {};
+              this.user = {};
+              this.router.navigate(["paymentDone"]);
+      });
+*/
+}
 
     proceed() {
-          console.log("Heloo");        
+        this.showVendorForm = true;
     }
 
     subscribeBiller() {

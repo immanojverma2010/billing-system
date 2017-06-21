@@ -6,10 +6,14 @@
 
 </ul>
 <br> <br>
+
+
+<!--*****************Subscribe biller page****************-->
+
 <div class="" name="Subscribe Biller" [hidden]="!regBillerPage">
 
 
-  <form class="form-horizontal" >
+  <form class="form-horizontal" (ngSubmit)="billerTxn()" >
   <fieldset>
 <div class="">
     <span class="pul-left text-success">
@@ -22,10 +26,15 @@
 
   <h1>Subscribe biller:</h1><br>
 
+  <div class="col-md-10" style="margin-left:145">
+  <div class="panel panel-primary">
+  <div class="panel-heading">Fill Details</div>
+    <div class="panel-body">
+
 <div class="form-group">
   <label class="col-md-5 control-label">Select your city:</label>
   <div class="col-md-6">
-    <select class="control-label" #city (click)=onInputCity(city.value)>
+    <select class="control-label" #city (click)=onInputCity(city.value) name="city" [(ngModel)]=formData.city>
         <option *ngFor="let x of options" [value]="x.name">{{x.name}}</option>
     </select>
                   {{msg}}
@@ -35,7 +44,7 @@
     <div class="form-group" *ngIf=billers>
         <label class="col-md-5 control-label">select  biller:</label>
             <div class="col-md-6">
-              <select class="control-label" #biller (click)=onInputBiller(biller.value)>
+              <select class="control-label" #biller (click)=onInputBiller(biller.value) name="biller"[(ngModel)]=formData.biller>
                   <option *ngFor="let y of billers" [value]="y.email">{{y.billername}}</option>
               </select>
            </div>
@@ -47,20 +56,167 @@
          <input type="text" [disabled]="true"  [value]="user.account">
       </div>
     </div>
+  </div>
+</div>
+</div>
+
+          <!--Panel for selection of payment mode-->
 
     <div class="form-group" *ngIf=billerValue >
-      <div class="" [hidden]="true ? setTimeout(function(){return false;},1500): true">
-          Hello
+
+      <div class="col-md-10" style="margin-left:160"[hidden]="!modeOfPayment">
+
+
+<div class="panel panel-primary">
+<div class="panel-heading">Select mode of payment</div>
+  <div class="panel-body">
+   <div class="panel-group">
+    <div class="col-sm-4" >
+  <div class="panel panel-info" style="border:0">
+     <div class="panel-heading">Immediate Payment</div>
+      <div class="panel-body">
+
+    <div class="panel panel-info">
+      <div class="panel-body pull-left">
+
+
+
+        <div class="radio">
+            <label class="text-danger">
+                <input type="radio" name="paymentMode" value="payNow" [(ngModel)]="formData.paymentMode">
+              One-time
+            </label>
+        </div>
+
+
+
+          <ul>
+            <li class="text-muted">Make immediate bill payments easily.</li>
+            <li class="text-muted">Add the biller to your biller list for easy payment in future.</li>
+          </ul>
       </div>
+    </div>
+
+       </div>
+    </div>
+    <hr>
+   </div>
+
+      <div class="col-sm-8">
+   <div class="panel panel-info" style="border:0">
+      <div class="panel-heading">Register for Repeat Payments</div>
+       <div class="panel-body">
+      <div class="col-sm-6">
+        <div class="">
+
+
+     <div class="panel panel-info">
+        <div class="panel-body pull-left">
+
+
+          <div class="radio">
+              <label class="text-danger">
+                  <input type="radio" name="paymentMode" value="confirmPay" [(ngModel)]="formData.paymentMode">
+                  Confirm & pay
+              </label>
+          </div>
+
+
+            <ul>
+              <li class="text-muted">Register now & let us track your bills.</li>
+              <li class="text-muted">Get alerts reminding you to pay your bills before due date.</li>
+            </ul>
+        </div>
+     </div>
+     </div>
+    </div>
+
+    <div class="col-sm-6">
+     <div class="panel panel-info" >
+        <div class="panel-body pull-left">
+
+
+          <div class="radio">
+              <label class="text-danger">
+                  <input type="radio" name="paymentMode" value="autoPay" [(ngModel)]="formData.paymentMode">
+                  Auto pay
+              </label>
+          </div>
+
+        <ul>
+            <li class="text-muted">Register Now and have your bills paid automatically.</li>
+            <li class="text-muted">Get alerts for payment made.</li>
+        </ul>
+            </div>
+           </div>
+          </div>
+
+          </div>
+          <hr>
+       </div>
+
+       <div class="col-md-4 control-label" *ngIf="formData.paymentMode">
+         <input [hidden]="showVendorForm" type="button" class="btn-primary" name="button" value="Proceed" (click)="proceed()">
+       </div>
+
+      </div>
+     </div>
 
     </div>
-    <button class="btn" (click)="back()"> Back </button>
-    <button class="btn btn-primary" (click)="proceed()"> Proceed </button>
+    </div>
+
+
+      </div>
+    </div>
+<!--payment mode completed-->
+
+<!--Start Vendor Form-->
+
+<div class="" [hidden]=!showVendorForm >
+<div class="col-sm-8" style="margin-left:145">
+<div class="panel panel-primary">
+<div class="panel-heading">Fill vendor form</div>
+ <div class="panel-body well">
+
+   <!-- Text input-->
+   <div class="form-group">
+     <label class="col-md-4 control-label" for="contact">Mobile No:</label>
+     <div class="col-md-4">
+     <input id="4" name="contact" maxlength="10"  pattern="[0-9]{10}" title="Mobile number should be of 10 digit without +91" placeholder="Enter  mobile number" [(ngModel)]="formData.mobile" class="form-control input-md" required="">
+     </div>
+   </div>
+
+   <!-- Text input-->
+   <div class="form-group">
+     <label class="col-md-4 control-label" for="contact">Due Date:</label>
+     <div class="col-md-4">
+     <input id="4" type="date" name="duedate"placeholder="Enter due date" [(ngModel)]="formData.dueDate" class="form-control input-md" required="">
+     </div>
+   </div>
+
+   <!-- Text input-->
+   <div class="form-group">
+     <label class="col-md-4 control-label" for="contact">Bill Date:</label>
+     <div class="col-md-4">
+     <input id="4" type="date" name="billdate"placeholder="Enter bill date" [(ngModel)]="formData.billDate" class="form-control input-md" required="">
+     </div>
+   </div>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 control-label" *ngIf="formData.mobile">
+  <button type="submit" class="btn btn-primary">{{formData.paymentMode}}</button>
+
+</div>
 
 </fieldset>
 </form>
 </div>
 
+<!--*****************All bills page****************-->
 <div class="" name="Subscribe Biller" [hidden]="!bills">
 All bills
 </div>
