@@ -20,7 +20,7 @@ export class UserPageComponent implements OnInit {
   msg = null;
   username = null;
   user = {};
-  billerValue = null;
+  billerValue :string = null;
   showAccount = false;
   billers :any = null;
   showVendorForm =false;
@@ -85,34 +85,45 @@ export class UserPageComponent implements OnInit {
     }
 
 billerTxn() {
-  console.log(this.formData);
-  console.log(this.user);
-  let obj = this.billers.find(function (biller) {
-    return biller.billername === this.billerValue;
+let self =this;
+//  console.log(this.formData);
+//  console.log(this.user);
+  //console.log(this.billers);
+//  console.log(this.billerValue);
+//let str :string = this.billerValue;
+//console.log("String" +str);
+
+let obj = this.billers.find(function(biller) {
+    return biller.email === self.billerValue;
   });
 
+//console.log(obj);
   var billData = {
 userId : this.user.username,
 userAccount: this.user.account,
 userName: this.user.fullname,
-billerId: this.billerValue.email,
-billerAccount: this.billerValue.account,
-billerName: this.billerValue.name,
+billerId: obj.email,
+billerAccount: obj.account,
+billerName: obj.utilityname,
 paymentFor: this.formData.mobile,
 paymentMode: this.formData.paymentMode,
 billDate: this.formData.billDate,
-dueDate: this.formData.dueDate,
+dueDate: this.formData.dueDate
   };
 
 console.log(billData);
-  /*
-  this._billingService.storeBillingData(this.username)
+
+  this._billingService.storeBillingData(billData)
       .subscribe(data => {
+
+              console.log(data);
               this.formData = {};
               this.user = {};
-              this.router.navigate(["paymentDone"]);
+              this.billerValue = null ;
+
+              this.router.navigate(["/paymentDone"]);
       });
-*/
+
 }
 
     proceed() {
