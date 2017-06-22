@@ -28,7 +28,7 @@ export class UserLoginComponent implements OnInit {
     doLogin() {
       let self = this;
         this.loading = true;
-        console.log(this.model.username +" :" +this.model.password);
+        console.log(this.model.username.trim().toLowerCase() +" :" +this.model.password.trim());
         this._userService.login(this.model.username.trim(), this.model.password.trim())
             .subscribe(data => {
                         console.log(data);

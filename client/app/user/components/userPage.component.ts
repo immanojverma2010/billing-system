@@ -66,7 +66,7 @@ export class UserPageComponent implements OnInit {
                         if(data.msg) {
                             this.msg = data.msg;
                             setTimeout(function(){self.msg = null;
-                            },3000);
+                            },2000);
                             this.city = null;
                         } else {
                             this.billers = data ;
@@ -86,18 +86,10 @@ export class UserPageComponent implements OnInit {
 
 billerTxn() {
 let self =this;
-//  console.log(this.formData);
-//  console.log(this.user);
-  //console.log(this.billers);
-//  console.log(this.billerValue);
-//let str :string = this.billerValue;
-//console.log("String" +str);
-
 let obj = this.billers.find(function(biller) {
     return biller.email === self.billerValue;
   });
 
-//console.log(obj);
   var billData = {
 userId : this.user.username,
 userAccount: this.user.account,
@@ -111,20 +103,32 @@ billDate: this.formData.billDate,
 dueDate: this.formData.dueDate
   };
 
-console.log(billData);
-
   this._billingService.storeBillingData(billData)
       .subscribe(data => {
-
               console.log(data);
-              this.formData = {};
-              this.user = {};
-              this.billerValue = null ;
-              this.showVendorForm = false;
-              this.router.navigate(["/paymentDone"]);
+
+              this.clearData();
+              this.router.navigate(["/paymentDone", {email: billData.userId, msg: data.msg}]);
+                
       });
 
 }
+
+  clearData() {
+  this.regBillerPage = false;
+  this.bills = false;
+  this.city = null;
+  this.msg = null;
+  this.username = null;
+  this.user = {};
+  this.billerValue = null;
+  this.showAccount = false;
+  this.billers = null;
+  this.showVendorForm =false;
+  this.modeOfPayment = false;
+  this.formData = {};
+
+  }
 
     proceed() {
         this.showVendorForm = true;

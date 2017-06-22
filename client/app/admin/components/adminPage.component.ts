@@ -68,7 +68,7 @@ selectedValue(name :any) { // right now: ['1','3']
             this._billerService.addBiller(this.biller)
                 .subscribe(data => {
                   console.log(data);
-                  this.clearValues();
+                  this.clearData();
                   this.msg = data.msg;
                   setTimeout(function(){self.msg = null;
                   },2000);
@@ -77,7 +77,7 @@ selectedValue(name :any) { // right now: ['1','3']
 
     }
 
-    clearValues() {
+    clearData() {
       this.options.forEach(function(option) {
         option.checked = false;
       });

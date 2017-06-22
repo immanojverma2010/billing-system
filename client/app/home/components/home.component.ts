@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
     let admin = {
       fullname : "Manoj Verma",
-      username : "admin",
+      username : "admin@gmail.com",
       password : "abc",
       age : "22",
       contact : "1234567890"

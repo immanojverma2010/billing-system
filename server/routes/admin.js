@@ -49,8 +49,14 @@ router.route("/adminLogIn")
     if(err){
       res.send(err);
     }
-    else{
-            res.send(admin);
+    else if (admin) {
+
+          var resObj = {msg:""};
+            res.send(resObj);
+    }
+    else {
+      var resObj = {msg:"either username or/and password is incorrect or you are not authorized for admin..."};
+        res.send(resObj);
     }
   });
 }
