@@ -17,9 +17,17 @@ router.route("/userLogIn")
     if(err){
       res.send(err);
     }
-    else{
-            res.send(user);
+    else if (user) {
+              var resObj = {msg: ""};
+            res.send(resObj);           
     }
+
+    else{
+      var resObj = {msg: "username or/and password is not correct"};
+res.send(resObj);
+    }
+
+
   });
 }
 });
