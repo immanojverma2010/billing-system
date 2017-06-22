@@ -14,6 +14,8 @@ import {BillingService} from "../../services/billing-service";
     providers: [BillerService, UserService, BillingService]
 })
 export class UserPageComponent implements OnInit {
+  userBills :any = null;
+  billMsg = null;
   regBillerPage = false;
   bills = false;
   city = null;
@@ -52,6 +54,7 @@ export class UserPageComponent implements OnInit {
               .subscribe(data => {
                       this.user = data;
               });
+
     }
 
     onInputCity(value :any) {
@@ -84,11 +87,30 @@ export class UserPageComponent implements OnInit {
           setTimeout(function (){self.modeOfPayment = true;},0);
     }
 
+getCurrentDate() :string {
+  var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+
+var yyyy = today.getFullYear();
+if(dd<10) {
+    dd = '0'+dd;
+}
+if(mm<10) {
+    mm = '0'+mm;
+}
+return (yyyy +'-' +mm +'-' +dd );
+
+}
+
+
 billerTxn() {
 let self =this;
 let obj = this.billers.find(function(biller) {
     return biller.email === self.billerValue;
   });
+
+var todayDate = this.getCurrentDate();
 
   var billData = {
 userId : this.user.username,
@@ -96,11 +118,13 @@ userAccount: this.user.account,
 userName: this.user.fullname,
 billerId: obj.email,
 billerAccount: obj.account,
-billerName: obj.utilityname,
+billerName: obj.billername,
+utilityName: obj.utilityname,
 paymentFor: this.formData.mobile,
 paymentMode: this.formData.paymentMode,
 billDate: this.formData.billDate,
-dueDate: this.formData.dueDate
+dueDate: this.formData.dueDate,
+txnDate: todayDate
   };
 
   this._billingService.storeBillingData(billData)
@@ -109,7 +133,7 @@ dueDate: this.formData.dueDate
 
               this.clearData();
               this.router.navigate(["/paymentDone", {email: billData.userId, msg: data.msg}]);
-                
+
       });
 
 }
@@ -140,7 +164,20 @@ dueDate: this.formData.dueDate
     }
 
     showBills() {
-      this.regBillerPage = false;
-      this.bills = true;
+
+      this._billingService.findbills(this.username)
+          .subscribe(data => {
+            this.regBillerPage = false;
+            this.bills = true;
+                    if (data.msg) {
+                        this.billMsg = data.msg;
+                        this.userBills = {};
+                    } else {
+                      this.userBills = data;
+                      //console.log(this.userBills);
+                    }
+          });
+
+
     }
 }

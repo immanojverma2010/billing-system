@@ -10,6 +10,10 @@ export class BillingService {
             console.log('Biller Service Initialized...');
           }
 
+          findbills(value : any) {
+            return this.http.get('/billing/findBills/' +value)
+                .map((res:Response) => res.json());
+          }
 
         storeBillingData(value : any) {
           console.log(value);

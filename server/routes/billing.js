@@ -8,6 +8,28 @@ router.get('/', function(req, res, next) {
 });
 
 
+router.route("/findBills/:userId")
+.get(function (req,res) {
+    //var name=req.body.name;
+
+      //console.log(req.params.username);
+      Billing.find({userId:req.params.userId},function(err,result){
+        if(err)
+        {
+          res.send(err);
+        }
+        else if (result) {
+          console.log(result);
+          res.send(result);
+        }
+        else {
+          var resObj = {msg: "Hurray!!!..No Pending bills with you"};
+        }
+      });
+});
+
+
+
 
 router.route("/addBill")
 .post(function (req,res) {

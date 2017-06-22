@@ -9,10 +9,12 @@ var billingDetailsSchema = new Schema({
   billerId: String,
   billerAccount:String,
   billerName:String,
+  utilityName:String,
   paymentFor:String,
   paymentMode:String,
   billDate: String,
-  dueDate:String
+  dueDate:String,
+  txnDate:String
 });
 
 module.exports = mongoose.model('BillingDetails',billingDetailsSchema);

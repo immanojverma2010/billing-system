@@ -220,6 +220,22 @@
 
 <!--*****************All bills page****************-->
 <div class="" name="Subscribe Biller" [hidden]="!bills">
-All bills
+
+
+
+{{billMsg}}
+
+<div class="" *ngIf="userBills">
+<h3>All bills</h3>
+<div *ngFor="let bill of userBills; let i = index" >
+  Row {{i+1}} : {{bill.billerName}}  &nbsp; {{bill.utilityName}} &nbsp; {{bill.paymentFor}}
+  &nbsp; {{bill.billDate}} &nbsp; {{bill.dueDate}} &nbsp;
+  <span *ngIf="bill.paymentMode=='Confirm Pay'"> payment done on {{bill.txnDate}} and you are registered with us for reminder</span>
+  <span *ngIf="bill.paymentMode=='Pay Now'"> payment done on {{bill.txnDate}}</span>
+  <span *ngIf="bill.paymentMode=='Auto Pay'"> Don't worry, you are registered with us!!!. we'll
+    do the payment before due date and send you the notification</span>
+</div>
+</div>
+
 </div>
 </div>
