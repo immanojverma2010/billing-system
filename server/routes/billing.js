@@ -32,11 +32,11 @@ router.route("/addBill")
             res.send(err);
           }
           else{
-                if (req.body.paymentMode == "confirmPay") {
+                if (req.body.paymentMode == "Confirm Pay") {
                       var resObj = {msg : "Payment done and mobile number " +req.body.paymentFor +" registered with the biller"};
                   //    console.log("confirmPay");
                   //    console.log(resObj);
-                } else if (req.body.paymentMode == "autoPay") {
+                } else if (req.body.paymentMode == "Auto Pay") {
                       var resObj = {msg : "your mobile number " +req.body.paymentFor +" registered with us we will pay your bill and send you the notification"};
                     //  console.log("autoPay");
                   //    console.log(resObj);

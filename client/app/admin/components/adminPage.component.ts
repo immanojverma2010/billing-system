@@ -31,12 +31,13 @@ cities = [];
 selectedValue(name :any) { // right now: ['1','3']
 //console.log(name);
 //console.log(this.options);
-let self = this;
+//let self = this;
  this.options.forEach(function( obj ) {
             //  console.log(obj);
         if (obj.name === name) {
         //  console.log(obj);
-          self.options[obj.index].checked = !self.options[obj.index].checked;
+          //self.options[obj.index].checked = !self.options[obj.index].checked;
+          obj.checked = !obj.checked;
         }
 });
 //console.log(this.options);
@@ -63,18 +64,25 @@ let self = this;
        let  self = this ;
             this.getCityValues();
             this.biller.cities = this.cities;
-            this.cities = [];
             this.msg = null;
             this._billerService.addBiller(this.biller)
                 .subscribe(data => {
                   console.log(data);
+                  this.clearValues();
                   this.msg = data.msg;
                   setTimeout(function(){self.msg = null;
                   },2000);
                   console.log(this.msg);
-                  this.biller = {};
                 });
 
+    }
+
+    clearValues() {
+      this.options.forEach(function(option) {
+        option.checked = false;
+      });
+      this.biller = {};
+      this.cities = [];
     }
 
     addUser() {

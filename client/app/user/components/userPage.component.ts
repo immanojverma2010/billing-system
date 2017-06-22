@@ -120,7 +120,7 @@ console.log(billData);
               this.formData = {};
               this.user = {};
               this.billerValue = null ;
-
+              this.showVendorForm = false;
               this.router.navigate(["/paymentDone"]);
       });
 

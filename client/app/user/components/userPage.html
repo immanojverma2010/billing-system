@@ -1,5 +1,15 @@
 <div class="container">
   <br>
+  <div class="col-lg-12 well">
+      <span class="pul-left text-success">
+      Hello {{user.fullname}}
+    </span>
+    <span class="pull-right text-success">
+      {{user.username}}
+    </span></div>
+    <br>
+
+
   <ul class="nav nav-tabs">
   <li [class.active]="regBillerPage"><a href="javascript:void(0)" (click)=subscribeBiller()>Register Biller</a></li>
   <li [class.active]="bills"><a href="javascript:void(0)" (click)=showBills()>Show Pending Bills</a></li>
@@ -15,14 +25,6 @@
 
   <form class="form-horizontal" (ngSubmit)="billerTxn()" >
   <fieldset>
-<div class="">
-    <span class="pul-left text-success">
-    Hello {{user.fullname}}
-  </span>
-  <span class="pull-right text-success">
-    {{user.username}}
-  </span></div>
-  <br><br>
 
   <h1>Subscribe biller:</h1><br>
 
@@ -83,7 +85,7 @@
 
         <div class="radio">
             <label class="text-danger">
-                <input type="radio" name="paymentMode" value="payNow" [(ngModel)]="formData.paymentMode">
+                <input type="radio" name="paymentMode" value="Pay Now" [(ngModel)]="formData.paymentMode">
               One-time
             </label>
         </div>
@@ -116,7 +118,7 @@
 
           <div class="radio">
               <label class="text-danger">
-                  <input type="radio" name="paymentMode" value="confirmPay" [(ngModel)]="formData.paymentMode">
+                  <input type="radio" name="paymentMode" value="Confirm Pay" [(ngModel)]="formData.paymentMode">
                   Confirm & pay
               </label>
           </div>
@@ -138,7 +140,7 @@
 
           <div class="radio">
               <label class="text-danger">
-                  <input type="radio" name="paymentMode" value="autoPay" [(ngModel)]="formData.paymentMode">
+                  <input type="radio" name="paymentMode" value="Auto Pay" [(ngModel)]="formData.paymentMode">
                   Auto pay
               </label>
           </div>
@@ -155,9 +157,6 @@
           <hr>
        </div>
 
-       <div class="col-md-4 control-label" *ngIf="formData.paymentMode">
-         <input [hidden]="showVendorForm" type="button" class="btn-primary" name="button" value="Proceed" (click)="proceed()">
-       </div>
 
       </div>
      </div>
@@ -168,15 +167,18 @@
 
       </div>
     </div>
+    <div class="col-md-7 control-label" [hidden]="showVendorForm" >
+      <button  [disabled]="!(formData.paymentMode)" type="button" class="btn btn-primary" (click)="proceed()"> Proceed </button>
+    </div>
 <!--payment mode completed-->
 
 <!--Start Vendor Form-->
 
 <div class="" [hidden]=!showVendorForm >
-<div class="col-sm-8" style="margin-left:145">
-<div class="panel panel-primary">
+<div class="col-sm-10" style="margin-left:145">
+<div class="panel panel-primary" style="background-color:rgba(166, 161, 161, 0.26)">
 <div class="panel-heading">Fill vendor form</div>
- <div class="panel-body well">
+ <div class="panel-body" style="">
 
    <!-- Text input-->
    <div class="form-group">
@@ -203,13 +205,13 @@
    </div>
 
 </div>
+
 </div>
 </div>
 </div>
 
-<div class="col-md-4 control-label" *ngIf="formData.mobile">
-  <button type="submit" class="btn btn-primary">{{formData.paymentMode}}</button>
-
+<div class="col-md-7 control-label"  *ngIf="showVendorForm">
+<button type="submit" [disabled]="!( (formData.mobile) && (formData.billDate) && (formData.dueDate))" class="btn btn-primary">{{formData.paymentMode}}</button>
 </div>
 
 </fieldset>
