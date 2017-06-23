@@ -235,6 +235,25 @@
   <span *ngIf="bill.paymentMode=='Auto Pay'"> Don't worry, you are registered with us!!!. we'll
     do the payment before due date and send you the notification</span>
 </div>
+
+<table>
+  <tr>
+    <th>Bill No.</th> <th>Bill Name</th> <th>Type</th> <th>Mobile bill No.</th> <th>Bill Date </th> <th>Due date</th> <th>status</th> <th>info</th>
+  </tr>
+
+  <tr *ngFor="let bill of userBills; let i = index">
+    <td>{{i+1}}</td>   <td>{{bill.billerName}}</td> <td>{{bill.utilityName}}</td>
+    <td>{{bill.paymentFor}}</td> <td>{{bill.billDate}} </td>{{bill.dueDate}}</td>
+    <td>
+      <span *ngIf="bill.paymentMode=='Pay Now'"> Done </span>
+      <span *ngIf="bill.paymentMode=='Confirm Pay'">   
+        <p *ngIf="">
+
+      </p></span>
+      <span *ngIf="bill.paymentMode=='Auto Pay'"> Auto pay</span>
+    </td>
+  </tr>
+</table>
 </div>
 
 </div>
