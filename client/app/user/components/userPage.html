@@ -230,9 +230,9 @@
 <div class="" *ngIf="userBills">
 <h3>All payments</h3>
 
-<table>
+<table class="table table-striped">
   <tr>
-    <th>Bill No.</th> <th>Bill Name</th> <th>Type</th> <th>Mobile No.</th> <th>Bill Date </th> <th>Due date</th> <th>Transaction Type</th> <th>transaction date</th>
+    <th>Bill No.</th> <th>Bill Name</th> <th>Type</th> <th>Mobile No.</th> <th>Bill Date </th> <th>Due date</th> <th>Transaction Type</th> <th>Transaction date</th>
   </tr>
 
   <tr *ngFor="let bill of userBills; let i = index">
@@ -244,7 +244,7 @@
       <span *ngIf="bill.paymentMode=='Confirm Pay'"> Transaction and Registered</span>
       <span *ngIf="bill.paymentMode=='Auto Pay'"> Auto pay</span>
     </td> <td>{{bill.txnDate}}  </td>
-<td>{{bill.paymentStatus}}  </td>
+
   </tr>
 </table>
 </div>
@@ -255,7 +255,7 @@
 <div class="" name="All payments" [hidden]="!pendingBills">
 <h1>Pending Bills</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
    <th >Bill Name</th> <th>Type</th> <th>Mobile No.</th> <th>Bill Date </th> <th>Due date</th> <th>Action</th>
 
