@@ -17,7 +17,8 @@ export class UserPageComponent implements OnInit {
   userBills :any = null;
   billMsg = null;
   regBillerPage = false;
-  bills = false;
+  payments = false;
+  pendingBills = false;
   city = null;
   msg = null;
   username = null;
@@ -140,7 +141,7 @@ txnDate: todayDate
 
   clearData() {
   this.regBillerPage = false;
-  this.bills = false;
+  this.payments = false;
   this.city = null;
   this.msg = null;
   this.username = null;
@@ -159,16 +160,22 @@ txnDate: todayDate
     }
 
     subscribeBiller() {
-        this.bills = false;
+        this.payments = false;
         this.regBillerPage = true;
     }
 
-    showBills() {
+    showPendingBills() {
+      this.payments = false;
+      this.regBillerPage = false;
+      this.pendingBills = true;
+    }
+
+    showOrders() {
 
       this._billingService.findbills(this.username)
           .subscribe(data => {
             this.regBillerPage = false;
-            this.bills = true;
+            this.payments = true;
                     if (data.msg) {
                         this.billMsg = data.msg;
                         this.userBills = {};
@@ -184,18 +191,23 @@ txnDate: todayDate
 
     checkPaymentStatus() {
       var d = new Date();
-
-
-
       this.userBills.forEach(function(bill) {
         var lastPayment = bill.txnDate;
         if (bill.paymentMode === "Confirm Pay"
-            //&& bill.dueDate.substring(0,2) < d.getDate().toString()
-            &&  (d.getMonth.toString() + 1) > bill.txnDate.substring(3,2)) {
+            //&& d.getDate() > parseInt(bill.dueDate.substring(8,10),10)
+
+            && (d.getMonth() + 1) > ( parseInt(bill.txnDate.substring(5,7),10)) ) {
+              console.log((d.getMonth() + 1));
+              console.log(bill.txnDate.substring(3,2));
             bill.paymentStatus = true;
+            console.log("if condition checked");
         } else {
-          bill.paymentStatus = true;
+          bill.paymentStatus = false;
         }
       });
     }
+     payNow(value :any) {
+       this.userBills[i].paymentStatus = false;
+     }
+
 }

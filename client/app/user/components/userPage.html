@@ -12,8 +12,8 @@
 
   <ul class="nav nav-tabs">
   <li [class.active]="regBillerPage"><a href="javascript:void(0)" (click)=subscribeBiller()>Register Biller</a></li>
-  <li [class.active]="bills"><a href="javascript:void(0)" (click)=showBills()>Show Pending Bills</a></li>
-
+  <li [class.active]="payments"><a href="javascript:void(0)" (click)=showOrders()>Show Payments</a></li>
+  <li [class.active]="pendingBills"><a href="javascript:void(0)" (click)=showPendingBills()>Pending Bills</a></li>
 </ul>
 <br> <br>
 
@@ -219,44 +219,54 @@
 </div>
 
 <!--*****************All bills page****************-->
-<div class="" name="Subscribe Biller" [hidden]="!bills">
+<div class="" name="All payments" [hidden]="!payments">
 
 
 
 {{billMsg}}
 
 <div class="" *ngIf="userBills">
-<h3>All bills</h3>
-<div *ngFor="let bill of userBills; let i = index" >
-  Row {{i+1}} : {{bill.billerName}}  &nbsp; {{bill.utilityName}} &nbsp; {{bill.paymentFor}}
-  &nbsp; {{bill.billDate}} &nbsp; {{bill.dueDate}} &nbsp;
-  <span *ngIf="bill.paymentMode=='Confirm Pay'"> payment done on {{bill.txnDate}} and you are registered with us for reminder</span>
-  <span *ngIf="bill.paymentMode=='Pay Now'"> payment done on {{bill.txnDate}}</span>
-  <span *ngIf="bill.paymentMode=='Auto Pay'"> Don't worry, you are registered with us!!!. we'll
-    do the payment before due date and send you the notification</span>
-</div>
+<h3>All payments</h3>
 
 <table>
   <tr>
-    <th>Bill No.</th> <th>Bill Name</th> <th>Type</th> <th>Mobile bill No.</th> <th>Bill Date </th> <th>Due date</th> <th>status</th> <th>info</th>
+    <th>Bill No.</th> <th>Bill Name</th> <th>Type</th> <th>Mobile bill No.</th> <th>Bill Date </th> <th>Due date</th> <th>Transaction Type</th> <th>transaction date</th>
   </tr>
 
   <tr *ngFor="let bill of userBills; let i = index">
-    <td>{{i+1}}</td>   <td>{{bill.billerName}}</td> <td>{{bill.utilityName}}</td>
-    <td>{{bill.paymentFor}}</td> <td>{{bill.billDate}} </td>{{bill.dueDate}}</td>
-    <td>
-      <span *ngIf="bill.paymentMode=='Pay Now'"> Done </span>
-      <span *ngIf="bill.paymentMode=='Confirm Pay'">
-        <p *ngIf="bill.paymentStatus"> Payment Needed <a href="javascript:void(0)" (click)="payNow(i)"> Pay Now</a>     </p>
-        <p *ngIf="!bill.paymentStatus"> Payment Done      </p>
-      </span>
-      <span *ngIf="bill.paymentMode=='Auto Pay'"> Auto pay</span>
-    </td>
 
-    <td>paymentMode {{bill.paymentMode}} on {{bill.txnDate}}   </td>
+    <td>{{i+1}}</td>   <td>{{bill.billerName}}</td> <td>{{bill.utilityName}}</td>
+    <td>{{bill.paymentFor}}</td>  <td>{{bill.billDate}} </td>   <td>{{bill.dueDate}}</td>
+    <td>
+      <span *ngIf="bill.paymentMode=='Pay Now'"> One Time transacton </span>
+      <span *ngIf="bill.paymentMode=='Confirm Pay'"> Transaction and Registered</span>
+      <span *ngIf="bill.paymentMode=='Auto Pay'"> Auto pay</span>
+    </td> <td>{{bill.txnDate}}  </td>
   </tr>
 </table>
 </div>
+
+</div>
+
+
+<div class="" name="All payments" [hidden]="!pendingBills">
+Hi pending bills
+
+<table>
+  <tr>
+   <th>Bill Name</th> <th>Type</th> <th>Mobile bill No.</th> <th>Bill Date </th> <th>Due date</th> <th>Action</th>
+
+  </tr>
+
+  <tr *ngFor="let bill of userBills; let i = index">
+    <div class=""   >
+
+      <td>
+        {{bill.billerName}}
+      </td>
+    </div>
+  </tr>
+</table>
 
 </div>
 </div>

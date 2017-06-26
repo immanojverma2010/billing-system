@@ -23,7 +23,7 @@ router.route("/findBills/:userId")
           res.send(result);
         }
         else {
-          var resObj = {msg: "Hurray!!!..No Pending bills with you"};
+          var resObj = {msg: "No transaction data found"};
         }
       });
 });
