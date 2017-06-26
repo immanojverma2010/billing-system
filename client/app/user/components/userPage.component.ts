@@ -161,6 +161,7 @@ txnDate: todayDate
 
     subscribeBiller() {
         this.payments = false;
+        this.pendingBills = false;
         this.regBillerPage = true;
     }
 
@@ -175,6 +176,7 @@ txnDate: todayDate
       this._billingService.findbills(this.username)
           .subscribe(data => {
             this.regBillerPage = false;
+            this.pendingBills = false;
             this.payments = true;
                     if (data.msg) {
                         this.billMsg = data.msg;

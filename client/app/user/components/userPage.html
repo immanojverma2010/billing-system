@@ -258,13 +258,13 @@ Hi pending bills
 
   </tr>
 
-  <tr *ngFor="let bill of userBills; let i = index">
-    <div class=""   >
+  <tr *ngFor="let bill of userBills | billfilter: 'billerName' : 'Airtel'"  >
 
-      <td>
+
+      <td >
         {{bill.billerName}}
       </td>
-    </div>
+
   </tr>
 </table>
 
