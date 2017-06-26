@@ -174,7 +174,7 @@ txnDate: todayDate
                         this.userBills = {};
                     } else {
                       this.userBills = data;
-                      this.checkPaymentStatus()
+                      this.checkPaymentStatus();
                       //console.log(this.userBills);
                     }
           });
@@ -188,10 +188,14 @@ txnDate: todayDate
 
 
       this.userBills.forEach(function(bill) {
-        var lastPayment = bill.txnDate
-        if (bill.paymentMode === "Confirm Pay" && bill.dueDate.substring(0,2) < d.getDate() && bill.txnDate.substring(3,2) == d.getMonth) {
+        var lastPayment = bill.txnDate;
+        if (bill.paymentMode === "Confirm Pay"
+            //&& bill.dueDate.substring(0,2) < d.getDate().toString()
+            &&  (d.getMonth.toString() + 1) > bill.txnDate.substring(3,2)) {
             bill.paymentStatus = true;
-        } else {}
+        } else {
+          bill.paymentStatus = true;
+        }
       });
     }
 }

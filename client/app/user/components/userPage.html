@@ -246,12 +246,14 @@
     <td>{{bill.paymentFor}}</td> <td>{{bill.billDate}} </td>{{bill.dueDate}}</td>
     <td>
       <span *ngIf="bill.paymentMode=='Pay Now'"> Done </span>
-      <span *ngIf="bill.paymentMode=='Confirm Pay'">   
-        <p *ngIf="">
-
-      </p></span>
+      <span *ngIf="bill.paymentMode=='Confirm Pay'">
+        <p *ngIf="bill.paymentStatus"> Payment Needed <a href="javascript:void(0)" (click)="payNow(i)"> Pay Now</a>     </p>
+        <p *ngIf="!bill.paymentStatus"> Payment Done      </p>
+      </span>
       <span *ngIf="bill.paymentMode=='Auto Pay'"> Auto pay</span>
     </td>
+
+    <td>paymentMode {{bill.paymentMode}} on {{bill.txnDate}}   </td>
   </tr>
 </table>
 </div>
