@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {OnInit} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
+import {BillFilterPipe} from "./billFilterPipe";
 
 import {BillerService} from "../../services/biller-service";
 import {UserService} from "../../services/user-service";
@@ -11,7 +12,8 @@ import {BillingService} from "../../services/billing-service";
 @Component({
     selector:"user-page",
     templateUrl: './app/user/components/userPage.html',
-    providers: [BillerService, UserService, BillingService]
+    providers: [BillerService, UserService, BillingService],
+    pipes: [BillFilterPipe]
 })
 export class UserPageComponent implements OnInit {
   userBills :any = null;
@@ -85,7 +87,7 @@ export class UserPageComponent implements OnInit {
           let self = this;
           this.billerValue = value;
           console.log(this.billerValue);
-          setTimeout(function (){self.modeOfPayment = true;},0);
+          setTimeout(function (){self.modeOfPayment = true;},750);
     }
 
 getCurrentDate() :string {
@@ -169,15 +171,23 @@ txnDate: todayDate
       this.payments = false;
       this.regBillerPage = false;
       this.pendingBills = true;
+      this.showOrders("pendingBills");
     }
 
-    showOrders() {
+    showOrders(value : any) {
 
       this._billingService.findbills(this.username)
           .subscribe(data => {
-            this.regBillerPage = false;
-            this.pendingBills = false;
-            this.payments = true;
+            if (value === "pendingBills" ) {
+              this.regBillerPage = false;
+              this.pendingBills = true;
+              this.payments = false;
+            } else {
+              this.regBillerPage = false;
+              this.pendingBills = false;
+              this.payments = true;
+            }
+
                     if (data.msg) {
                         this.billMsg = data.msg;
                         this.userBills = {};
@@ -209,7 +219,12 @@ txnDate: todayDate
       });
     }
      payNow(value :any) {
-       this.userBills[i].paymentStatus = false;
+       var todayDate = this.getCurrentDate();
+       value.txnDate = todayDate;
+       this._billingService.pay(value)
+           .subscribe(data => {
+             console.log(data);
+           });
      }
 
 }

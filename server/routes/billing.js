@@ -77,4 +77,30 @@ router.route("/addBill")
       }
     });
 
+
+
+
+
+
+
+
+
+    router.route("/payment")
+    .put(function (req,res) {
+      if(req.body){
+          console.log(req.body);
+        Billing.findOneAndUpdate({billerId:req.body.billerId, userId: req.body.userId, paymentFor: req.body.paymentFor},
+              { $set: { txnDate: req.body.txnDate } },
+           function(err,bill){
+          if(err)
+          {
+            res.send(err);
+          }
+          else{
+            res.send(bill);
+          }
+        });
+      }
+    });
+
 module.exports = router;

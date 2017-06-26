@@ -6,6 +6,12 @@ a {
     font-size: 12px;
 }
 
+th {
+  colspan: "2";
+}
+td {
+  colspan: "2";
+}
 .checkbox-grid #cb {
     display: block;
     float: left;

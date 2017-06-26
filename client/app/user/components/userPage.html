@@ -12,7 +12,7 @@
 
   <ul class="nav nav-tabs">
   <li [class.active]="regBillerPage"><a href="javascript:void(0)" (click)=subscribeBiller()>Register Biller</a></li>
-  <li [class.active]="payments"><a href="javascript:void(0)" (click)=showOrders()>Show Payments</a></li>
+  <li [class.active]="payments"><a href="javascript:void(0)" (click)=showOrders(null)>Show Payments</a></li>
   <li [class.active]="pendingBills"><a href="javascript:void(0)" (click)=showPendingBills()>Pending Bills</a></li>
 </ul>
 <br> <br>
@@ -193,6 +193,7 @@
      <label class="col-md-4 control-label" for="contact">Due Date:</label>
      <div class="col-md-4">
      <input id="4" type="date" name="duedate"placeholder="Enter due date" [(ngModel)]="formData.dueDate" class="form-control input-md" required="">
+     <span><small>Note: date would be consider as day of every month</small></span>
      </div>
    </div>
 
@@ -201,6 +202,7 @@
      <label class="col-md-4 control-label" for="contact">Bill Date:</label>
      <div class="col-md-4">
      <input id="4" type="date" name="billdate"placeholder="Enter bill date" [(ngModel)]="formData.billDate" class="form-control input-md" required="">
+     <span><small>Note: date would be consider as day of every month</small></span>
      </div>
    </div>
 
@@ -230,7 +232,7 @@
 
 <table>
   <tr>
-    <th>Bill No.</th> <th>Bill Name</th> <th>Type</th> <th>Mobile bill No.</th> <th>Bill Date </th> <th>Due date</th> <th>Transaction Type</th> <th>transaction date</th>
+    <th>Bill No.</th> <th>Bill Name</th> <th>Type</th> <th>Mobile No.</th> <th>Bill Date </th> <th>Due date</th> <th>Transaction Type</th> <th>transaction date</th>
   </tr>
 
   <tr *ngFor="let bill of userBills; let i = index">
@@ -242,6 +244,7 @@
       <span *ngIf="bill.paymentMode=='Confirm Pay'"> Transaction and Registered</span>
       <span *ngIf="bill.paymentMode=='Auto Pay'"> Auto pay</span>
     </td> <td>{{bill.txnDate}}  </td>
+<td>{{bill.paymentStatus}}  </td>
   </tr>
 </table>
 </div>
@@ -250,22 +253,20 @@
 
 
 <div class="" name="All payments" [hidden]="!pendingBills">
-Hi pending bills
+<h1>Pending Bills</h1>
 
 <table>
   <tr>
-   <th>Bill Name</th> <th>Type</th> <th>Mobile bill No.</th> <th>Bill Date </th> <th>Due date</th> <th>Action</th>
+   <th >Bill Name</th> <th>Type</th> <th>Mobile No.</th> <th>Bill Date </th> <th>Due date</th> <th>Action</th>
 
   </tr>
 
-  <tr *ngFor="let bill of userBills | billfilter: 'billerName' : 'Airtel'"  >
-
-
-      <td >
-        {{bill.billerName}}
-      </td>
-
+  <tr *ngFor="let bill of userBills"  [hidden]="bill.paymentStatus">
+<td >{{bill.billerName}}</td> <td >{{bill.utilityName}}</td> <td >{{bill.paymentFor}}</td>
+<td >{{bill.billDate.substring(8,10)}} of every month</td>   <td>{{bill.dueDate.substring(8,10)}} of every month</td>
+<td> <a href="javascript:void(0)" (click)="payNow(bill)"> Pay Now</a> </td>
   </tr>
+
 </table>
 
 </div>
