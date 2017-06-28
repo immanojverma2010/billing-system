@@ -260,6 +260,7 @@
    <th >Bill Name</th> <th>Type</th> <th>Mobile No.</th> <th>Bill Date </th> <th>Due date</th> <th>Action</th>
 
   </tr>
+  
 
   <tr *ngFor="let bill of userBills"  [hidden]="!bill.paymentStatus">
 <td >{{bill.billerName}}</td> <td >{{bill.utilityName}}</td> <td >{{bill.paymentFor}}</td>
