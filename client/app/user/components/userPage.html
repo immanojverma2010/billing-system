@@ -261,7 +261,7 @@
 
   </tr>
 
-  <tr *ngFor="let bill of userBills"  [hidden]="bill.paymentStatus">
+  <tr *ngFor="let bill of userBills"  [hidden]="!bill.paymentStatus">
 <td >{{bill.billerName}}</td> <td >{{bill.utilityName}}</td> <td >{{bill.paymentFor}}</td>
 <td >{{bill.billDate.substring(8,10)}} of every month</td>   <td>{{bill.dueDate.substring(8,10)}} of every month</td>
 <td> <a href="javascript:void(0)" (click)="payNow(bill)"> Pay Now</a> </td>
