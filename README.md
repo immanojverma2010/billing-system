@@ -1,7 +1,7 @@
 Angular2 with TypeScript and Gulp
 =================================
 
-A basic Angular2 application with Gulp as build system.
+Billing System application with Gulp as build system.
 
 #### 1. Prerequisites
 
@@ -45,6 +45,14 @@ Install dependencies by running the following command:
 
 `node_modules` and `typings` directories will be created during the install.
 
+> cd server
+
+change directory to install server side
+
+> npm install
+
+`node_modules`  directories will be created during the install in server side.
+
 #### 4. Building the project
 
 Build the project by running the following command:
@@ -64,4 +72,18 @@ The application will be displayed in the browser.
 Resources
 ---------
 
-- [A step-by-step tutorial](http://blog.codeleak.pl/2016/03/quickstart-angular2-with-typescript-and.html)
+#### 6. Information about app
+
+1. Login as admin
+
+note: default admin is already added
+
+credentials are:
+username: admin@gmail.com
+password: abc
+
+2. Add Uer and biller after logged in as a an admin
+
+3. login as an user whatever you have created and select biller and do the payment
+
+4. App will show next month pending bill in pending bill section
